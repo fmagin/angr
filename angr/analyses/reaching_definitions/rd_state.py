@@ -263,6 +263,9 @@ class ReachingDefinitionsState:
                                                  tags={ParameterTag(function=func_addr)})
                             reg = self.annotate_with_def(self.top(self.arch.bits), reg_def)
                             self.register_definitions.store(reg_offset, reg)
+                            d = next(self.live_definitions.get_definitions(reg_atom))
+                            assert d == reg_def
+                            assert d.tags == reg_def.tags
 
                         # initialize stack parameters
                         elif isinstance(arg, SimStackArg):
