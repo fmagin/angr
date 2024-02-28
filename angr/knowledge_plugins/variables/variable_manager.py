@@ -1012,8 +1012,7 @@ class VariableManager(KnowledgeBasePlugin):
     """
 
     def __init__(self, kb):
-        super().__init__()
-        self._kb: "KnowledgeBase" = kb
+        super().__init__(kb=kb)
         self.global_manager = VariableManagerInternal(self)
         self.function_managers: Dict[int, VariableManagerInternal] = {}
 

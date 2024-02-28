@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 class StructuredCodeManager(KnowledgeBasePlugin):
     def __init__(self, kb):
-        self._kb: KnowledgeBase = kb
+        super().__init__(kb=kb)
         self.cached: Dict[Any, "DecompilationCache"] = {}
 
     def _normalize_key(self, item):
