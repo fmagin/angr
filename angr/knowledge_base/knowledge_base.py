@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     from ..knowledge_plugins import PropagationManager
     from ..knowledge_plugins import XRefManager
 
-from ..knowledge_plugins.plugin import default_plugins, KnowledgeBasePlugin
+from ..knowledge_plugins.plugin import default_plugins, KnowledgeBasePlugin, KnowledgeViewPlugin
 
 l = logging.getLogger(name=__name__)
 
@@ -140,6 +140,8 @@ class KnowledgeBase:
         if existing is not None:
             return existing
         else:
-            p = requested_plugin_cls(self)
+            p = requested_plugin_cls(kb=self)
+            if isinstance(p, KnowledgeViewPlugin):
+                p.gather()
             self.register_plugin(requested_plugin_cls.__name__, p)
             return p
