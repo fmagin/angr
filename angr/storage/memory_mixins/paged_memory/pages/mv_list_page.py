@@ -283,6 +283,10 @@ class MVListPage(
         self, other: "MVListPage", page_addr: int = None, memory=None, changed_offsets=None
     ) -> bool:  # pylint: disable=unused-argument
         compared_to = None
+
+        if changed_offsets is None:
+            return True
+
         for b in sorted(changed_offsets):
             if compared_to is not None and not b >= compared_to:
                 continue
